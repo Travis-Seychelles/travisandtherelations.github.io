@@ -6,452 +6,296 @@
     <title>Travis & The Relations</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" xintegrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        /* General Body and Background */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Open Sans', sans-serif; /* Body text will be Open Sans */
+            background-color: #1a1a1a; /* Dark background similar to Imagine Dragons site */
+            color: #e0e0e0; /* Light gray text for contrast */
         }
-        .bg-seychelles {
-            background-image: url('https://images.unsplash.com/photo-1571173121509-085c36399702?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
+        /* Overlay for background image - creating a darker, moodier feel */
+        .bg-overlay {
+            background-image: url('https://images.unsplash.com/photo-1517457371190-e0099e078502?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* A darker, more abstract image for a band aesthetic */
             background-size: cover;
             background-position: center;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding-top: 8rem; /* Add padding at the top for fixed elements */
-            box-sizing: border-box; /* Include padding in body's total width/height */
+            position: relative;
         }
+
+        .bg-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Dark overlay to make text pop and unify the look */
+            z-index: -1; /* Place behind content but above the image */
+        }
+
+        /* Headings */
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif; /* Headings will be Montserrat for impact */
+            color: #ffffff; /* Pure white for strong headings */
+            font-weight: 700; /* Bold headings */
+        }
+
+        /* Hyperlinks - General */
         .hyperlink {
-            color: #f5f5f5;
+            color: #8B0000; /* Dark red/maroon, an accent color that feels edgy */
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .hyperlink:hover {
-            color: #d4d4d4;
+            color: #FF4500; /* Brighter orange-red on hover for a strong contrast */
         }
 
-        .album-link {
-            background-color: rgba(255, 255, 255, 0.1);
+        /* Album/Video Boxes - Replacing glassmorphism with a more solid, dark, and textured feel */
+        .album-box, .video-box, .merch-box {
+            background-color: rgba(30, 30, 30, 0.8); /* Darker, less transparent background */
             border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            padding: 1.5rem;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid rgba(70, 70, 70, 0.5); /* Subtle dark border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Stronger, darker shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem; /* Ensure spacing between boxes */
         }
 
-        .album-link:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        .album-box:hover, .video-box:hover, .merch-box:hover {
+            transform: translateY(-8px) scale(1.02); /* More pronounced lift and slight scale */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Even stronger shadow on hover */
         }
 
+        /* Album/Video Box Titles and Descriptions */
         .album-title {
-            font-size: 1.2rem;
-            font-weight: 500;
+            font-size: 1.5rem; /* Larger and bolder for emphasis */
+            font-weight: 700;
             color: #ffffff;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
+        .album-box p, .video-box p, .merch-box p {
+            color: #b0b0b0; /* Slightly lighter gray for body text within boxes */
+            margin-bottom: 1rem;
+        }
+
+        /* Platform Links (Buttons) */
         .platform-links {
             display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 0.5rem;
+            gap: 0.75rem; /* Reduced gap slightly */
+            margin-top: 1rem; /* Space from description */
         }
 
         .platform-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            background-color: #E6BE8A;
+            padding: 0.6rem 1.2rem; /* Slightly larger padding */
+            border-radius: 0.25rem; /* Sharper corners for a modern look */
+            background-color: #8B0000; /* Primary accent color for buttons */
             color: #ffffff;
             text-decoration: none;
-            transition: background-color 0.3s ease;
-            font-size: 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 600; /* Semi-bold button text */
+            border: none; /* Remove border for a cleaner look */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow on buttons */
         }
 
         .platform-links a:hover {
-            background-color: #D1A975;
+            background-color: #FF4500; /* Accent hover color */
+            transform: translateY(-2px); /* Slight lift on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
         }
 
-        .social-icon {
-            width: 1.5rem;
-            height: 1.5rem;
+        .platform-links i {
             margin-right: 0.5rem;
         }
 
+        /* Carousel Styles (If you decide to re-implement) */
+        /* Note: Carousel will be removed in the provided HTML but keeping styles for reference */
         .carousel-container {
-            position: relative;
-            width: 90%;
-            margin: 2rem auto;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .carousel-slide {
-            display: none;
-            width: 100%;
-            padding: 1rem;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            height: auto;
-        }
-
-        .carousel-slide img {
-            max-width: 80%;
-            max-height: 80%;
-            border-radius: 0.5rem;
-            margin: 0 auto;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .carousel-slide iframe {
-            width: 80%;
-            height: 450px;
-            border-radius: 0.5rem;
-            margin: 0 auto;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 0 1rem;
+            /* Keep some of your original styles, but adjust colors */
+            background-color: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(70, 70, 70, 0.5);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
         }
 
         .carousel-nav button {
-            background-color: rgba(230, 190, 138, 0.3);
+            background-color: rgba(139, 0, 0, 0.7); /* Darker accent for nav buttons */
             color: #ffffff;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 0.375rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .carousel-nav button:hover {
-            background-color: rgba(230, 190, 138, 0.5);
-            transform: scale(1.1);
+            background-color: rgba(255, 69, 0, 0.9); /* Brighter accent on hover */
+            transform: scale(1.05); /* Slightly less scale than before for subtle effect */
         }
 
-        .active {
-            display: flex;
-            flex-direction: column;
-        }
-
+        /* Social Media Icons (General) */
         .social-media-links {
             text-align: center;
             margin-top: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem; /* Adjusted for overall spacing */
         }
 
         .social-media-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            color: #e0e0e0; /* Light gray for social icons */
+            font-size: 1.2rem; /* Adjusted font size for general social links */
             margin: 0 1rem;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: transform 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .social-media-links a:hover {
-            transform: scale(1.2);
+           color: #FF4500; /* Accent color on hover */
+           transform: scale(1.3); /* Stronger scale for impact */
         }
 
         .social-media-links i {
-            font-size: 2rem;
-            margin-right: 0.5rem;
+            font-size: 2.2rem; /* Slightly larger for main social section */
         }
 
-        #youtube-icon {
-            font-size: 2.5rem;
-        }
-
+        /* Footer */
         .footer {
             text-align: center;
-            padding: 1rem;
-            color: #ffffff;
-            font-size: 0.8rem;
+            padding: 1.5rem; /* Increased padding */
+            color: #a0a0a0; /* Softer gray for footer text */
+            font-size: 0.9rem;
             margin-top: auto;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.8); /* Very dark, almost black, semi-transparent */
+            border-top: 1px solid rgba(50, 50, 50, 0.5); /* Darker border */
+            backdrop-filter: blur(5px); /* Less blur for a more solid feel */
         }
 
-        .instagram-highlights {
-            margin-bottom: 2rem;
-        }
-
+        /* Instagram Highlights */
         .instagram-highlights h2 {
-            font-size: 2xl;
-            font-semibold;
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 1.5rem;
+            font-size: 2.5rem; /* Larger heading */
+            font-weight: 700;
+            margin-bottom: 2rem;
         }
 
         .instagram-grid {
-            display: grid;
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .instagram-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .instagram-grid {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
+            gap: 1.5rem; /* Increased gap */
         }
 
         .instagram-post {
-            border-radius: 0.5rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .instagram-post img {
-            width: 100%;
-            display: block;
-        }
-
-        .album-section {
-            margin-bottom: 2rem;
-        }
-
-        .album-section h2{
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-
-
-        .album-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 2rem;
-        }
-
-        .album-box:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .album-box h3{
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1rem;
-        }
-
-        .album-box iframe{
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .video-links-section{
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .video-links-section h2{
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .video-grid{
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        @media (min-width: 768px){
-            .video-grid{
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .video-box {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(70, 70, 70, 0.5); /* Darker border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .video-box:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        .instagram-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
         }
 
-        .video-box h3{
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1rem;
+        /* Video Links Section */
+        .video-links-section h2 {
+            font-size: 2.5rem; /* Consistent large heading */
+            font-weight: 700;
         }
 
-        .video-box iframe{
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
+        .video-grid {
+            gap: 2rem; /* More space between videos */
         }
 
+        /* Header Banner */
         .header-banner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #ffffff;
-            padding: 0.5rem 1rem;
-            text-align: center;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.9); /* Almost opaque dark header */
+            padding: 0.75rem 1.5rem; /* Increased padding */
+            border-bottom: 1px solid rgba(70, 70, 70, 0.5); /* Darker, more defined border */
+            backdrop-filter: blur(5px); /* Less blur */
         }
 
         .header-banner h1 {
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: bold;
+            font-size: 1.8rem; /* Larger, more prominent header title */
+            font-weight: 700;
+            text-transform: uppercase; /* Uppercase for a band logo feel */
+            letter-spacing: 0.05em; /* Slightly spaced out letters */
         }
 
         .header-banner img {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-left: 1rem;
-            border: 2px solid #E6BE8A;
-        }
-
-        .main-content {
-            padding-top: 8rem; /* Increased padding to account for both fixed elements */
-        }
-
-        .header-social-links {
-            display: flex;
-            gap: 0.5rem;
-            margin-left: 1rem;
+            width: 3.5rem; /* Slightly larger logo */
+            height: 3.5rem;
+            border: 2px solid #8B0000; /* Accent color border around logo */
         }
 
         .header-social-links a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: transform 0.3s ease;
+            font-size: 1.2rem; /* Larger icons in header */
         }
 
         .header-social-links a:hover {
-            transform: scale(1.2);
+            color: #FF4500;
+            transform: scale(1.3);
         }
 
-        .header-social-links i {
-            font-size: 1.5rem;
-        }
-
-        .merch-box-section {
-            position: fixed; /* Fix the merch box */
-            top: 4rem; /* Position it below the header banner (4rem height) */
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            padding: 1rem;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+        /* Merch Box Styling - Darker, more aligned with the theme */
+        .merch-box-section h2 {
+            font-size: 2.5rem; /* Consistent large heading */
+            font-weight: 700;
+            margin-bottom: 2rem;
         }
 
         .merch-box {
-            background-color: #B76E79;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .merch-box h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 1rem;
+            background-color: #4a0000; /* A deep, dark red for the merch box */
+            color: #ffffff; /* White text on this dark background */
+            padding: 2rem; /* More padding */
+            border-radius: 0.75rem; /* Slightly more rounded corners */
+            border: 2px solid #FF4500; /* A strong accent border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Prominent shadow */
+            margin-bottom: 3rem; /* More space below */
         }
 
         .merch-box p {
-            color: #000000;
-            margin-bottom: 1rem;
+            color: #e0e0e0; /* Slightly off-white for description */
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         .merch-link {
-            color: black;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem;
-            background-color: #E6BE8A;
-            transition: background-color 0.3s ease;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
+            background-color: #FF4500; /* Bright orange-red for the call to action */
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            border-radius: 0.35rem;
             text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .merch-link:hover {
-            background-color: #D1A975;
+            background-color: #cc3600; /* Darker red on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
-        .merch-link i{
-            margin-right: 0.5rem;
+
+        .merch-link i {
+            margin-right: 0.75rem;
+        }
+
+        /* Adjustments for iframes to fit the new aesthetic */
+        iframe {
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Consistent shadow */
+            border: 1px solid rgba(70, 70, 70, 0.5); /* Subtle dark border */
         }
 
     </style>
 </head>
-<body class="bg-seychelles">
-    <header class="header-banner">
+<body class="bg-overlay"> <header class="header-banner">
         <h1>Travis & The Relations</h1>
         <div class="header-social-links">
             <a href="https://www.instagram.com/travis_seychelles_julienne?igsh=d2ltamNwZ3QybzJq" target="_blank" rel="noopener noreferrer">
@@ -470,28 +314,25 @@
         <img src="https://via.placeholder.com/100" alt="Band Logo">
     </header>
 
-    <section class="merch-box-section">
-        <div class="merch-box">
+    <main class="container mx-auto px-4 py-8 main-content"> <section class="merch-box-section">
             <h2 class="text-2xl font-semibold text-white text-center mb-6">Pre-Sale Benediksyon Merch Box</h2>
-            <p class="text-black mb-4">
-                Get your hands on the exclusive "Benediksyon" Merch Box before it hits the general market! This special pre-sale offer includes a curated collection of items inspired by the album, available for a limited time.
-            </p>
-            <a href="#" class="merch-link">
-                <i class="fas fa-shopping-cart"></i>
-                Pre-Order Now
-            </a>
-        </div>
-    </section>
-
-    <main class="container mx-auto px-4 main-content">
-
+            <div class="merch-box">
+                <p>
+                    Get your hands on the exclusive "Benediksyon" Merch Box before it hits the general market! This special pre-sale offer includes a curated collection of items inspired by the album, available for a limited time.
+                </p>
+                <a href="#" class="merch-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    Pre-Order Now
+                </a>
+            </div>
+        </section>
 
         <section class="album-section">
             <h2 class="text-2xl font-semibold text-white text-center mb-6">Our Albums</h2>
             <div class="space-y-8">
                 <div class="album-box">
                     <h3 class="album-title">Relasyon</h3>
-                    <p class="text-gray-300 mb-4">
+                    <p>
                         Description of Relasyon album. You can add details about the album's themes,
                         style, or any interesting facts here.
                     </p>
@@ -504,12 +345,11 @@
                 </div>
                 <div class="album-box">
                     <h3 class="album-title">Pasyon</h3>
-                    <p class="text-gray-300 mb-4">
+                    <p>
                         Description of Pasyon album. Include information about the songs, the
                         inspiration behind the album, or any notable collaborations.
                     </p>
-
-                    <div class="platform-links">
+                     <div class="platform-links">
                         <a href="https://music.apple.com/us/album/pasyon/1108321962" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-apple"></i> Apple Music
                         </a>
@@ -526,11 +366,10 @@
                 </div>
                 <div class="album-box">
                     <h3 class="album-title">Proze 1</h3>
-                    <p class="text-gray-300 mb-4">
+                     <p>
                         Description of Proze 1 album. Talk about the style, the recording process,
                         or any significant details about this release.
                     </p>
-                    <iframe src="https://www.youtube.com/embed/your_video_id_2" title="Featured Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <iframe src="https://bandcamp.com/EmbeddedPlayer/album=123456789/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=true/artwork=small/" title="Proze 1 Album" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <div class="platform-links">
                         <a href="https://relations.bandcamp.com/album/proze-1" target="_blank" rel="noopener noreferrer">
@@ -540,9 +379,9 @@
                 </div>
                 <div class="album-box">
                     <h3 class="album-title">LIMZK</h3>
-                    <p class="text-gray-300 mb-4">
-                        Description of LIMZK. Provide details about the album's concept,
-                        any unique aspects, or the overall message.
+                    <p>
+                       Description of LIMZK. Provide details about the album's concept,
+                       any unique aspects, or the overall message.
                     </p>
                     <iframe src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/123456789&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_reposts=false&show_teaser=true&visual=true" title="LIMZK Album" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     <div class="platform-links">
@@ -558,29 +397,53 @@
             <h2 class="text-2xl font-semibold text-white text-center mb-6">Featured Videos</h2>
             <div class="video-grid">
                 <div class="video-box">
-                    <h3>Title of First Video</h3>
-                     <iframe  src="http://youtube.com/embed/dQw4w9WgXcQ"  allowfullscreen></iframe>
-                 </div>
+                    <h3>Official Music Video</h3>
+                    <iframe src="https://www.youtube.com/embed/your-video-id-1" title="Official Music Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <p>A description of this video, what it's about, or behind-the-scenes info.</p>
+                    <div class="platform-links">
+                        <a href="https://www.youtube.com/watch?v=your-video-id-1" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube"></i> Watch on YouTube
+                        </a>
+                    </div>
+                </div>
                  <div class="video-box">
-                        <h3>Title of Second Video</h3>
-                     <iframe  src="http://youtube.com/embed/dQw4w9WgXcQ"  allowfullscreen></iframe>
-                 </div>
+                    <h3>Live Performance</h3>
+                    <iframe src="https://www.youtube.com/embed/your-video-id-2" title="Live Performance" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <p>Experience our live energy with this performance video.</p>
+                    <div class="platform-links">
+                        <a href="https://www.youtube.com/watch?v=your-video-id-2" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube"></i> Watch on YouTube
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <section class="instagram-highlights">
+            <h2 class="text-2xl font-semibold text-white text-center mb-6">Instagram Highlights</h2>
+            <div class="instagram-grid">
+                <div class="instagram-post">
+                    <a href="https://www.instagram.com/p/your-instagram-post-id-1/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://via.placeholder.com/400x400/333333/ffffff?text=Instagram+Post+1" alt="Instagram Post 1">
+                    </a>
+                </div>
+                <div class="instagram-post">
+                     <a href="https://www.instagram.com/p/your-instagram-post-id-2/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://via.placeholder.com/400x400/333333/ffffff?text=Instagram+Post+2" alt="Instagram Post 2">
+                    </a>
+                </div>
+                <div class="instagram-post">
+                     <a href="https://www.instagram.com/p/your-instagram-post-id-3/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://via.placeholder.com/400x400/333333/ffffff?text=Instagram+Post+3" alt="Instagram Post 3">
+                    </a>
+                </div>
+                </div>
+        </section>
     </main>
 
     <footer class="footer">
         <p>© 2024 Travis & The Relations. All rights reserved.</p>
     </footer>
 
-    <script>
-        const carouselSlides = document.querySelectorAll('.carousel-slide');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        let currentSlide = 0;
-
-        function showSlide(n) {
-            carouselSlides[currentSlide].classList.remove('active');
-            currentSlide = (n + carouselSlides.length) % carouselSlides.length;
-            carouselSlides[curr
+    </body>
+</html>
